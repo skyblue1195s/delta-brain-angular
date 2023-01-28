@@ -1,0 +1,76 @@
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible"
+  [nzTitle]="title" (nzOnClose)="closeForm()">
+  <form nz-form nzLayout="vertical" [formGroup]="validateForm" *nzDrawerContent (ngSubmit)="submitForm($event)">
+    <nz-form-item>
+      <nz-form-label nzRequired [nzSpan]="4">Tên tài khoản</nz-form-label>
+      <nz-form-control nzHasFeedback [nzErrorTip]="usernameError">
+        <input nz-input formControlName="username" placeholder="Tên tài khoản"/>
+        <ng-template #usernameError let-control>
+          <ng-container *ngIf="control.hasError('required')">Vui lòng nhập tên tài khoản!</ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">Tên tài khoản phải nhỏ hơn 8 ký tự!  </ng-container>
+          <ng-container *ngIf="control.hasError('pattern')">Tên tài khoản không đúng định dạng!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item>
+      <nz-form-label nzRequired [nzSpan]="4">Tên</nz-form-label>
+      <nz-form-control nzHasFeedback [nzErrorTip]="fullnameError">
+        <input nz-input formControlName="fullname" placeholder="Họ và tên" />
+        <ng-template #fullnameError let-control>
+          <ng-container *ngIf="control.hasError('required')">Vui lòng nhập họ và tên!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+   
+    <nz-form-item>
+      <nz-form-label nzRequired [nzSpan]="4">Email</nz-form-label>
+      <nz-form-control nzHasFeedback [nzErrorTip]="emailError">
+        <input nz-input formControlName="email" placeholder="Địa chỉ email của bạn" />
+        <ng-template #emailError let-control>
+          <ng-container *ngIf="control.hasError('required')">Vui lòng nhập địa chỉ email!</ng-container>
+          <ng-container *ngIf="control.hasError('email')">Email không đúng định dạng!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired [nzSpan]="4"> Ngày sinh</nz-form-label>
+      <nz-form-control nzHasFeedback [nzErrorTip]="birthdayError">
+      <nz-date-picker formControlName="birthday" style="width: 100%;"></nz-date-picker>
+        <ng-template #birthdayError let-control>
+          <ng-container *ngIf="control.hasError('required')">Vui lòng chọn ngày sinh!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired [nzSpan]="4">Giới tính</nz-form-label>
+      <nz-form-control nzHasFeedback >
+        <nz-radio-group formControlName="sex">
+          <label nz-radio [nzValue]="true">Nam</label>
+          <label nz-radio [nzValue]="false">Nữ</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired [nzSpan]="4"> Địa chỉ</nz-form-label>
+      <nz-form-control nzHasFeedback [nzErrorTip]="addressError">
+        <textarea rows="4" nz-input formControlName="address" [maxlength]="200"></textarea>
+        <ng-template #addressError let-control>
+          <ng-container *ngIf="control.hasError('required')">Vui lòng nhập địa chỉ!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <button nz-button nzType="primary" [nzLoading]="loading">
+          Submit
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-drawer>

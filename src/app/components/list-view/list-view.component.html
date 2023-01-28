@@ -1,0 +1,33 @@
+<nz-table #userData class="list-view" [nzData]="listOfUsers" cdkDropList
+  (cdkDropListDropped)="drop($event)">
+  <thead>
+    <tr>
+      <th>Avatar</th>
+      <th>Tên tài khoản</th>
+      <th>Tên</th>
+      <th>Ngày sinh</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of userData.data" cdkDrag class="item-box">
+      <td> <img width="100px" height="100px"
+        [src]="checkSex(item.sex || false)" alt="" /></td>
+      <td>{{ item.username }}</td>
+      <td>{{ item.fullname }}</td>
+      <td>{{ item.birthday | date: "YYYY-MM-dd" }}</td>
+      <td>{{ item.email }}</td>
+      <td> 
+        <button nz-button nzType="default" nzShape="circle" class="mr-2" (click)="editUser(item)">
+          <span nz-icon nzType="edit"></span>
+         </button>
+        <app-pop-confirm (onConfirm)="onRemove(item.id || '')">
+          <button nz-button nzType="default" nzDanger nzShape="circle">
+            <span nz-icon nzType="delete"  [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></span>
+          </button>
+        </app-pop-confirm>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

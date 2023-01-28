@@ -1,0 +1,16 @@
+<section>
+  <div nz-row class="mb-2">
+    <div nz-col [nzSpan]="18" [nzPush]="6" class="content-right">
+      <nz-switch [(ngModel)]="isListView" nzCheckedChildren="Card View" nzUnCheckedChildren="List View"></nz-switch>
+    </div>
+    <div nz-col [nzSpan]="6" [nzPull]="18">
+      <button (click)="openUserForm()" nz-button nzType="primary" nzShape="circle"><span nz-icon nzType="plus"></span></button>
+    </div>
+  </div>
+  <app-list-view *ngIf="isListView; else cardView"></app-list-view>
+  <ng-template #cardView>
+    <app-card-view></app-card-view>
+  </ng-template>
+</section>
+
+<app-user-popup></app-user-popup>
